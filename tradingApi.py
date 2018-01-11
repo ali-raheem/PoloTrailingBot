@@ -11,7 +11,7 @@ class polo:
 	prices = {}
 	def __init__(self, key, secret):
 		self.key = key
-		self.secret = secret
+		self.secret = str(secret)
 		self.nonce = count(int(time.time() * 1000))
 		self.getPrices()
 		
