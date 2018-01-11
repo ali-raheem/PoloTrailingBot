@@ -17,13 +17,11 @@ class polo:
 		
 	def makeRequest(self, payload):
 		payload['nonce'] = next(self.nonce)
-		request = requests.Request('POST', 'https://poloniex.com/tradingApi',
-								   data=payload, headers='')
+		request = requests.Request('POST', 'https://poloniex.com/tradingApi', data = payload, headers = '')
 		prepReq = request.prepare()
 		reqSig = hmac.new(self.secret, prepReq.body, digestmod=hashlib.sha512)
 		prepReq.headers['Sign'] = reqSig.hexdigest()
 		prepReq.headers['Key'] = self.key
-
 		response = requests.Session().send(prepReq)
 		response = json.loads(response.text)
 		try:

@@ -1,3 +1,3 @@
 # TODO
 
-* Actually add trailing stop loss
+* Test trailing buy and sell
