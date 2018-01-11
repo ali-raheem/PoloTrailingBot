@@ -3,4 +3,5 @@
     "api-secret": "",
     "email": "",
     "notifications": 1,
+    "nonce": 1
 }

@@ -24,7 +24,7 @@ class polo:
 		prepReq.headers['Sign'] = reqSig.hexdigest()
 		prepReq.headers['Key'] = self.key
 
-		response = request.Session().send(prepReq)
+		response = requests.Session().send(prepReq)
 		response = json.loads(response.text)
 		try:
 			print(response["error"])
