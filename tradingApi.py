@@ -10,27 +10,24 @@ class polo:
 	def __init__(self, key, secret):
 		self.key = key
 		self.secret = secret
-		self.NONCE_COUNTER = count(int(time.time() * 1000))
+		self.nonce = count(int(time.time() * 1000))
 		self.getPrices()
 		
-	def makeRequest(self, payload, headers=''):
-		payload['nonce'] = next(self.NONCE_COUNTER)
-		request = requests.Request(
-			'POST', 'https://poloniex.com/tradingApi',
-			data=payload, headers=headers
-		)
+	def makeRequest(self, payload):
+		payload['nonce'] = next(self.nonce)
+		request = requests.Request('POST', 'https://poloniex.com/tradingApi',
+								   data=payload, headers='')
 		prepReq = request.prepare()
 		reqSig = hmac.new(self.secret, prepReq.body, digestmod=hashlib.sha512)
 		prepReq.headers['Sign'] = reqSig.hexdigest()
 		prepReq.headers['Key'] = self.key
 
-		with requests.Session() as session:
-			response = session.send(prepReq)
-			response = json.loads(response.text)
-			try:
-				print(response["error"])
-			except:
-				return response
+		response = request.Session().send(prepReq)
+		response = json.loads(response.text)
+		try:
+			print(response["error"])
+		except:
+			return response
 
 	def moveOrder(self, orderid, rate):
 		payload = {}
