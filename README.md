@@ -1,4 +1,4 @@
-# PoloTrailingBot (PTB) v0.0.1
+# PoloTrailingBot (PTB) v0.0.2
 
 A simple bot to add trailing orders to poloniex crypto exchange
 
