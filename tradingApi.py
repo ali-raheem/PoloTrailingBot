@@ -1,3 +1,5 @@
+# Copyright (c) 2018 Ali Raheem
+
 import urllib2, json
 import requests
 import hmac

@@ -1,6 +1,5 @@
 #!/usr/bin/python
-
-# Get prices for pair
+# Copyright (c) 2018 Ali Raheem
 
 import urllib2, json
 from tradingApi import polo
@@ -42,7 +41,7 @@ def checkOrder(order):
 			print("{}: New peak rate: {}".format(order.pair, order.price))
 		elif (order.price < thres):
 			order.done = True
-			#api.sell(order.pair, order.amount, order.price)
+			api.sell(order.pair, order.amount, order.price)
 			print("sell {} on {} at {}.".format(order.amount, order.pair, order.price))
 		print("{} is at {} will order at {}".format(order.pair, order.price, thres))
 	else:
@@ -55,12 +54,14 @@ def checkOrder(order):
 			print("{}: New peak rate: {}".format(order.pair, order.price))
 		elif (order.price > thres):
 			order.done = True
-			#api.buy(order.pair, order.amount, order.price)
+			api.buy(order.pair, order.amount, order.price)
 			print("buy {} on {} at {}.".format(order.amount, order.pair, order.price))
 		print("{} is at {} will order at {}".format(order.pair, order.price, thres))
 
 
 if "__main__" == __name__:
+	print("Copyright (c) 2018 Ali Raheem")
+	print("Poloniex Trailing Bot")
 	config = json.loads(open('config.json', 'r').read())
 	api = polo(config["api-key"], config["api-secret"])
 	api.getPrices()
